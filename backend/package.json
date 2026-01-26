@@ -29,11 +29,16 @@
   },
   "dependencies": {
     "@faker-js/faker": "^10.2.0",
+    "celebrate": "^15.0.3",
     "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
     "ESLint": "npm:eslint@^8.57.1",
     "express": "^4.22.1",
+    "express-winston": "^4.2.0",
+    "joi": "^18.0.2",
     "mongoose": "^8.3.2",
-    "validator": "^13.11.0"
+    "validator": "^13.11.0",
+    "winston": "^3.19.0"
   },
   "keywords": [],
   "type": "commonjs"

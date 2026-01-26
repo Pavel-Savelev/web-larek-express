@@ -1,8 +1,9 @@
 import { Router } from 'express';
 import createOrder from '../controllers/order';
+import validateOrder from '../middlewares/validate-order';
 
-const router = Router();
+const orderRouter = Router();
 
-router.post('/order', createOrder);
+orderRouter.post('/order', validateOrder, createOrder);
 
-export default router;
+export default orderRouter;
