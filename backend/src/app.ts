@@ -7,6 +7,7 @@ import productRouter from './routes/product';
 import orderRouter from './routes/order';
 import errorHandler from './middlewares/error-handler';
 import { errorLogger, requestLogger } from './middlewares/logger';
+import notFoundMiddleware from './middlewares/error-route';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -26,6 +27,7 @@ app.use(requestLogger);
 app.use('/products', productRouter);
 app.use('/orders', orderRouter);
 
+app.use(notFoundMiddleware);
 app.use(errorLogger);
 
 app.use(errorHandler);

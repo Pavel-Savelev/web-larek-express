@@ -1,9 +1,8 @@
-class notFoundError extends Error {
-  public statusCode: number;
+import BaseError from './default-error';
 
-  constructor(message: string) {
-    super(message);
-    this.statusCode = 404;
+class notFoundError extends BaseError {
+  constructor(message: 'Страница не найдена') {
+    super(message, 404);
   }
 }
 export default notFoundError;

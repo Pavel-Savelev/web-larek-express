@@ -1,9 +1,8 @@
-class DefaultError extends Error {
+export default class BaseError extends Error {
   public statusCode: number;
 
-  constructor(message: string) {
+  constructor(message: string, statusCode = 500) {
     super(message);
-    this.statusCode = 500;
+    this.statusCode = statusCode;
   }
 }
-export default DefaultError;

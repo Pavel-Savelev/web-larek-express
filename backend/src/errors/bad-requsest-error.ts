@@ -1,9 +1,8 @@
-class BadRequestError extends Error {
-  public statusCode: number;
+import BaseError from './default-error';
 
-  constructor(message: string) {
-    super(message);
-    this.statusCode = 400;
+class BadRequestError extends BaseError {
+  constructor(message: 'Ошибка валидации данных при создании товара') {
+    super(message, 400);
   }
 }
 

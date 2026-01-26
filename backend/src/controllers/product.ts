@@ -29,7 +29,7 @@ export function createProduct(req: Request, res: Response, next: NextFunction) {
     }))
     .catch((err) => {
       if (err.code === 11000) {
-        return next(new ConflictError('Обнаружено одинаковое название продукта'));
+        return next(new ConflictError('Обнаружены существующие данные'));
       }
       return next(err);
     });

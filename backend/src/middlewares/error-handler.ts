@@ -1,25 +1,14 @@
+// middlewares/error-handler.ts
 import { Request, Response, NextFunction } from 'express';
-import BadRequestError from '../errors/bad-requsest-error';
-import DefaultError from '../errors/default-error';
-import ConflictError from '../errors/conflict-error';
-import notFoundError from '../errors/not-found-error';
+import BaseError from '../errors/default-error';
 
 function errorHandler(err: any, _req: Request, res: Response, _next: NextFunction) {
-  if (err instanceof BadRequestError) {
-    return res.status(err.statusCode).json({ message: err.message });
-  }
-
-  if (err instanceof ConflictError) {
-    return res.status(err.statusCode).json({ message: err.message });
-  }
-
-  if (err instanceof notFoundError) {
+  if (err instanceof BaseError) {
     return res.status(err.statusCode).json({ message: err.message });
   }
 
   console.error(err);
-  const defaultError = err.statusCode ? err : new DefaultError('Ошибка сервера');
-  return res.status(defaultError.statusCode).json({ message: defaultError.message });
+  return res.status(500).json({ message: 'Ошибка сервера' });
 }
 
 export default errorHandler;

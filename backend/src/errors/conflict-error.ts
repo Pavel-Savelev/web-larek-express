@@ -1,9 +1,8 @@
-class ConflictError extends Error {
-  public statusCode: number;
+import BaseError from './default-error';
 
-  constructor(message: string) {
-    super(message);
-    this.statusCode = 409;
+class ConflictError extends BaseError {
+  constructor(message: 'Обнаружены существующие данные') {
+    super(message, 409);
   }
 }
 
