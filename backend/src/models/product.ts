@@ -34,13 +34,13 @@ const productSchema = new mongoose.Schema<IProduct>({
   },
   image: {
     type: {
-      fileName: { type: String, required: true },
-      originalName: { type: String, required: true },
+      fileName: String,
+      originalName: String,
     },
     required: true,
   },
 });
 
-const Product = mongoose.model<IProduct>('Product', productSchema);
+const Product = mongoose.model<IProduct>('Product', productSchema, 'products');
 
 export default Product;
