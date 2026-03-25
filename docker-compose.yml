@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   frontend:
     build:
@@ -13,8 +15,11 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
-    volumes:
+    volumes:  
       - db:/data/db
+      - ./.dump:/dump 
+    ports:
+      - "27018:27017"
     networks:
       - internal
 
