@@ -59,7 +59,7 @@ app.get('/csrf-token', (req, res) => {
 });
 
 app.use('/product', productRouter);
-app.use('/orders', orderRouter);
+app.use('/order', orderRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorLogger);

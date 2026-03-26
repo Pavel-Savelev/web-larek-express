@@ -47,6 +47,7 @@ services:
     volumes:
       - frontend:/var/app
       - public:/var/public
+      - ./backend/public/images:/var/public/images
     depends_on:
       - frontend
       - backend

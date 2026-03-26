@@ -5,6 +5,6 @@ import createOrder from '../controllers/order';
 
 const orderRouter = Router();
 
-orderRouter.post('/order', validateOrder, sanitizeOrderMiddleware, createOrder);
+orderRouter.post('/', validateOrder, sanitizeOrderMiddleware, createOrder);
 
 export default orderRouter;
