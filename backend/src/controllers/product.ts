@@ -13,6 +13,16 @@ export function createProduct(req: Request, res: Response, next: NextFunction) {
     title, description, image, category, price,
   } = req.body;
 
+  if (!title || title.length < 2) {
+    return res.status(400).send({ message: 'Поле title обязательно и минимум 2 символа' });
+  }
+  if (!category) {
+    return res.status(400).send({ message: 'Поле category обязательно' });
+  }
+  if (!image || !image.fileName || !image.originalName) {
+    return res.status(400).send({ message: 'Поле image обязательно и должно содержать fileName и originalName' });
+  }
+
   return Product.create({
     title,
     description,
