@@ -16,7 +16,7 @@ export function createProduct(req: Request, res: Response, next: NextFunction) {
   return Product.create({
     title,
     description,
-    image,
+    image: image.fileName,
     category,
     price,
   })
