@@ -3,7 +3,7 @@ import { celebrate, Joi, Segments } from 'celebrate';
 const validateProduct = celebrate({
   [Segments.BODY]: Joi.object({
     title: Joi.string().min(2).max(30).required(),
-    description: Joi.string().required(),
+    description: Joi.string().max(900).required(),
     category: Joi.string().required(),
     price: Joi.number().positive().required(),
     image: Joi.object({

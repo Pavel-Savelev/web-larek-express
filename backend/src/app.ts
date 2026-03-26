@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
+import rateLimit from 'express-rate-limit';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import path from 'path';
@@ -23,11 +24,20 @@ mongoose
   .catch(console.error);
 
 app.use(cors());
-app.use(express.json());
+
+// Оказывается без true защита на ограниченнные запросы не работает
+app.use(express.urlencoded({ limit: '10kb', extended: true }));
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cookieParser());
+
+app.use(rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
+}));
 
 app.use(mongoSanitize({
   replaceWith: '_',
