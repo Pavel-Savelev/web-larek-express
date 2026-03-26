@@ -13,4 +13,11 @@ const validateProduct = celebrate({
   }),
 });
 
+export const validateProductQuery = celebrate({
+  [Segments.QUERY]: Joi.object({
+    name: Joi.string(),
+    price: Joi.number(),
+  }),
+});
+
 export default validateProduct;
