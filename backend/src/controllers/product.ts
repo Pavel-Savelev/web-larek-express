@@ -21,6 +21,7 @@ export function createProduct(req: Request, res: Response, next: NextFunction) {
     price,
   })
     .then((product) => res.status(201).send({
+      id: product._id,
       title: product.title,
       description: product.description,
       category: product.category,
