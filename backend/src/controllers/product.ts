@@ -24,12 +24,12 @@ export function createProduct(req: Request, res: Response, next: NextFunction) {
   }
 
   return Product.create({
-    title,
     description,
     image: {
       fileName: image.fileName,
       originalName: image.originalName,
     },
+    title,
     category,
     price,
   })
