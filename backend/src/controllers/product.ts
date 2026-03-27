@@ -31,14 +31,14 @@ export function createProduct(req: Request, res: Response, next: NextFunction) {
     },
     title,
     category,
-    price,
+    price: price || null,
   })
     .then((product) => res.status(201).send({
       id: product._id,
       title: product.title,
       description: product.description,
       category: product.category,
-      price: product.price,
+      price: product.price || null,
       image: product.image,
     }))
     .catch((err) => {

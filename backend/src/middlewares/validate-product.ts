@@ -5,7 +5,7 @@ const validateProduct = celebrate({
     title: Joi.string().min(2).max(30).required(),
     description: Joi.string().max(900).required(),
     category: Joi.string().required(),
-    price: Joi.number().positive().required(),
+    price: Joi.number().positive().optional().allow(null),
     image: Joi.object({
       fileName: Joi.string().required(),
       originalName: Joi.string().required(),
