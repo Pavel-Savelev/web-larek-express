@@ -42,7 +42,7 @@ export function createProduct(req: Request, res: Response, next: NextFunction) {
       image: product.image,
     }))
     .catch((err) => {
-      console.error('CREATE ERROR FULL:', JSON.stringify(err, null, 2)); // полная ошибка
+      console.error('CREATE ERROR FULL:', JSON.stringify(err, null, 2));
       if (err.code === 11000) {
         return next(new ConflictError('Обнаружены существующие данные'));
       }
