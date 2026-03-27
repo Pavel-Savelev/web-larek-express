@@ -26,8 +26,8 @@ export function createProduct(req: Request, res: Response, next: NextFunction) {
   return Product.create({
     description,
     image: {
-      fileName: image.fileName,
-      originalName: image.originalName,
+      fileName: image.fileName as string,
+      originalName: image.originalName as string,
     },
     title,
     category,
@@ -42,6 +42,7 @@ export function createProduct(req: Request, res: Response, next: NextFunction) {
       image: product.image,
     }))
     .catch((err) => {
+      console.error('CREATE ERROR FULL:', JSON.stringify(err, null, 2)); // полная ошибка
       if (err.code === 11000) {
         return next(new ConflictError('Обнаружены существующие данные'));
       }
