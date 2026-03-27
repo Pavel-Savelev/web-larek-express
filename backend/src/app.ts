@@ -28,9 +28,8 @@ mongoose
 
 app.use(cors());
 
-// Оказывается без true защита на ограниченнные запросы не работает
-app.use(express.json({ limit: '10kb' }));
-app.use(express.urlencoded({ limit: '10kb', extended: true }));
+app.use(express.json({ limit: '50kb' }));
+app.use(express.urlencoded({ limit: '50kb', extended: true }));
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'public')));
 
