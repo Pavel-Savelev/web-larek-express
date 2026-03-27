@@ -15,6 +15,9 @@ import { errorLogger, requestLogger } from './middlewares/logger';
 import notFoundMiddleware from './middlewares/error-route';
 
 const app = express();
+
+app.set('strict routing', false);
+
 const PORT = process.env.PORT || 3000;
 const MONGO_URI = process.env.DB_ADDRESS || 'mongodb://127.0.0.1:27017/weblarek';
 
