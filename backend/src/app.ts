@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import path from 'path';
 import cookieParser from 'cookie-parser';
-import csrf from 'csurf';
+// import csrf from 'csurf';
 import mongoSanitize from 'express-mongo-sanitize';
 import productRouter from './routes/product';
 import orderRouter from './routes/order';
@@ -46,20 +46,20 @@ app.use(mongoSanitize({
   replaceWith: '_',
 }));
 
-const csrfProtection = csrf({ cookie: true });
+// const csrfProtection = csrf({ cookie: true });
 
 // DISABLE_CSRF временно отключает CSRF-защиту для удобства разработки
-app.use((req, res, next) => {
-  if (process.env.DISABLE_CSRF === 'true') return next();
-  if (req.method === 'GET') return next();
-  return csrfProtection(req, res, next);
-});
+// app.use((req, res, next) => {
+//   if (process.env.DISABLE_CSRF === 'true') return next();
+//   if (req.method === 'GET') return next();
+//   return csrfProtection(req, res, next);
+// });
 
 app.use(requestLogger);
 
-app.get('/csrf-token', (req, res) => {
-  res.json({ csrfToken: req.csrfToken() });
-});
+// app.get('/csrf-token', (req, res) => {
+//   res.json({ csrfToken: req.csrfToken() });
+// });
 
 app.use('/product', productRouter);
 app.use('/order', orderRouter);
