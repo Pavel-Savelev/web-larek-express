@@ -13,8 +13,12 @@ export function createProduct(req: Request, res: Response, next: NextFunction) {
     title, description, image, category, price,
   } = req.body;
 
+  if (!title) {
+    return res.status(409).send({ message: 'title is required' });
+  }
+
   if (!title || title.length < 2) {
-    return res.status(400).send({ message: 'Поле title обязательно и минимум 2 символа' });
+    return res.status(409).send({ message: 'Поле title обязательно и минимум 2 символа' });
   }
   if (!category) {
     return res.status(400).send({ message: 'Поле category обязательно' });
