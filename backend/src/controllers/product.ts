@@ -17,7 +17,7 @@ export function createProduct(req: Request, res: Response, next: NextFunction) {
     return res.status(409).send({ message: 'title is required' });
   }
 
-  if (!title || title.length < 2) {
+  if (!title || title.length === 0 || title.length < 2) {
     return res.status(409).send({ message: 'Поле title обязательно и минимум 2 символа' });
   }
   if (!category) {
