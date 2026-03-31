@@ -10,7 +10,6 @@ export default function errorHandler(err: any, _req: Request, res: Response, _ne
     const key = detail?.context?.key;
 
     if (key === 'title') {
-      // Пример: пустой title → 409, слишком короткий → 400
       if (message.includes('is not allowed to be empty')) {
         return res.status(409).json({ message });
       }
