@@ -28,6 +28,12 @@ export function createProduct(req: Request, res: Response, next: NextFunction) {
     });
   }
 
+  if (title.trim().length > 30) {
+    return res.status(400).send({
+      message: 'Поле title обязательно и должно быть менее 30 символов',
+    });
+  }
+
   if (!category) {
     return res.status(400).send({ message: 'Поле category обязательно' });
   }
