@@ -13,7 +13,6 @@ export async function createProduct(req: Request, res: Response, next: NextFunct
       title, description, image, category, price,
     } = req.body;
 
-    // --- 2. Попытка создать продукт в базе ---
     const product = await Product.create({
       title,
       description,

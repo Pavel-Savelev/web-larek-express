@@ -1,4 +1,4 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
 interface IOrder {
   payment: 'card' | 'online';
@@ -33,8 +33,7 @@ const orderSchema = new mongoose.Schema<IOrder>({
   },
   items: [
     {
-      type: Schema.Types.ObjectId,
-      ref: 'Product',
+      type: String,
       required: true,
     },
   ],
