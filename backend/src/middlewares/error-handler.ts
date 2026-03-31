@@ -1,8 +1,8 @@
-// errorHandler.ts
 import { isCelebrateError } from 'celebrate';
 import { Request, Response, NextFunction } from 'express';
 
 export default function errorHandler(err: any, _req: Request, res: Response, _next: NextFunction) {
+  // Celebrate/Joi ошибки
   if (isCelebrateError(err)) {
     const bodyError = err.details.get('body');
     const detail = bodyError?.details?.[0];
@@ -10,10 +10,17 @@ export default function errorHandler(err: any, _req: Request, res: Response, _ne
     const key = detail?.context?.key;
 
     if (key === 'title') {
-      // Здесь можно выбрать статус в зависимости от типа ошибки
-      return res.status(409).json({ message });
+      // Пример: пустой title → 409, слишком короткий → 400
+      if (message.includes('is not allowed to be empty')) {
+        return res.status(409).json({ message });
+      }
+      if (message.includes('length must be at least')) {
+        return res.status(400).json({ message });
+      }
+      // Можно добавить другие условия для title
     }
 
+    // Для других полей по умолчанию 400
     return res.status(400).json({ message });
   }
 

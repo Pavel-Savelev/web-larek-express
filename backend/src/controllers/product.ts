@@ -13,25 +13,6 @@ export async function createProduct(req: Request, res: Response, next: NextFunct
       title, description, image, category, price,
     } = req.body;
 
-    // --- 1. Базовая валидация ---
-    if (!title || title.trim().length === 0) {
-      return res.status(400).json({ message: 'Поле title обязательно' });
-    }
-    if (title.trim().length < 2) {
-      return res.status(400).json({ message: 'Поле title должно быть не менее 2 символов' });
-    }
-    if (title.trim().length > 30) {
-      return res.status(400).json({ message: 'Поле title должно быть менее 30 символов' });
-    }
-    if (!category) {
-      return res.status(400).json({ message: 'Поле category обязательно' });
-    }
-    if (!image || !image.fileName || !image.originalName) {
-      return res.status(400).json({
-        message: 'Поле image обязательно и должно содержать fileName и originalName',
-      });
-    }
-
     // --- 2. Попытка создать продукт в базе ---
     const product = await Product.create({
       title,
