@@ -21,7 +21,9 @@ function validateProductResponse(_req: Request, res: Response, next: NextFunctio
     const { error } = schema.validate(data);
 
     if (error) {
-      console.error('Ошибка ответа:', error.details);
+      return res.status(500).json({
+        message: 'Неверный формат ответа сервера',
+      });
     }
 
     return originalJson.call(this, data);
@@ -29,5 +31,4 @@ function validateProductResponse(_req: Request, res: Response, next: NextFunctio
 
   next();
 }
-
 export default validateProductResponse;
