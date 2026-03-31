@@ -13,7 +13,11 @@ function errorHandler(err: any, _req: Request, res: Response, _next: NextFunctio
       // Здесь можно выбрать статус в зависимости от сообщения или типа ошибки
       if (message.includes('Поле title обязательно и должно существовать')) {
         return res.status(409).json({ message });
-      } return res.status(400).json({ message });
+      }
+      if (message.includes('Обнаружены существующие данные')) {
+        return res.status(409).json({ message });
+      }
+      return res.status(400).json({ message });
     }
 
     return res.status(400).json({ message });
