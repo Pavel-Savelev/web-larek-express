@@ -10,21 +10,27 @@ export function getProduct(_req: Request, res: Response, next: NextFunction) {
 
 export function createProduct(req: Request, res: Response, next: NextFunction) {
   const {
-    title, description, image, category, price,
+    title,
+    description,
+    image,
+    category,
+    price,
   } = req.body;
 
-  if (!title) {
-    return res.status(409).send({ message: 'title is required' });
+  if (!title || title.trim().length < 2) {
+    return res.status(409).send({
+      message: 'Поле title обязательно и должно быть не менее 2 символов',
+    });
   }
 
-  if (!title || title.length === 0 || title.length < 2) {
-    return res.status(409).send({ message: 'Поле title обязательно и минимум 2 символа' });
-  }
   if (!category) {
     return res.status(400).send({ message: 'Поле category обязательно' });
   }
   if (!image || !image.fileName || !image.originalName) {
-    return res.status(400).send({ message: 'Поле image обязательно и должно содержать fileName и originalName' });
+    return res.status(400).send({
+      message:
+        'Поле image обязательно и должно содержать fileName и originalName',
+    });
   }
 
   return Product.create({
