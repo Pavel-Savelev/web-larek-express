@@ -16,7 +16,7 @@ export function createProduct(req: Request, res: Response, next: NextFunction) {
     category,
     price,
   } = req.body;
-
+  console.log('CREATE PRODUCT WORKS');
   if (!title || title.trim().length < 2) {
     return res.status(409).send({
       message: 'Поле title обязательно и должно быть не менее 2 символов',
