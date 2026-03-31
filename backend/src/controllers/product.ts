@@ -1,6 +1,5 @@
 import { Response, Request, NextFunction } from 'express';
 import Product from '../models/product';
-import ConflictError from '../errors/conflict-error';
 
 export function getProduct(_req: Request, res: Response, next: NextFunction) {
   Product.find({})
@@ -65,7 +64,7 @@ export function createProduct(req: Request, res: Response, next: NextFunction) {
     .catch((err) => {
       console.error('CREATE ERROR FULL:', JSON.stringify(err, null, 2));
       if (err.code === 11000) {
-        return next(new ConflictError('Обнаружены существующие данные'));
+        return res.status(409).json({ message: 'Обнаружены существующие данные' });
       }
       return next(err);
     });

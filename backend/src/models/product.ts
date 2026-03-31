@@ -18,6 +18,7 @@ const productSchema = new mongoose.Schema<IProduct>({
     type: String,
     minlength: 2,
     maxlength: 100,
+    unique: true,
     required: true,
   },
   category: {
