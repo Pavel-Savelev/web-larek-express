@@ -1,14 +1,16 @@
 import { Response, Request, NextFunction } from 'express';
 import Product from '../models/product';
 
-async function createProduct(req: Request, res: Response, next: NextFunction) {
+export function getProduct(_req: Request, res: Response, next: NextFunction) {
+  Product.find({})
+    .then((product) => res.status(200).send({ items: product, total: product.length }))
+    .catch((err) => next(err));
+}
+
+export async function createProduct(req: Request, res: Response, next: NextFunction) {
   try {
     const {
-      title,
-      description,
-      image,
-      category,
-      price,
+      title, description, image, category, price,
     } = req.body;
 
     // --- 1. Базовая валидация ---
@@ -16,22 +18,17 @@ async function createProduct(req: Request, res: Response, next: NextFunction) {
       return res.status(400).json({ message: 'Поле title обязательно' });
     }
     if (title.trim().length < 2) {
-      return res
-        .status(400)
-        .json({ message: 'Поле title должно быть не менее 2 символов' });
+      return res.status(400).json({ message: 'Поле title должно быть не менее 2 символов' });
     }
     if (title.trim().length > 30) {
-      return res
-        .status(400)
-        .json({ message: 'Поле title должно быть менее 30 символов' });
+      return res.status(400).json({ message: 'Поле title должно быть менее 30 символов' });
     }
     if (!category) {
       return res.status(400).json({ message: 'Поле category обязательно' });
     }
     if (!image || !image.fileName || !image.originalName) {
       return res.status(400).json({
-        message:
-          'Поле image обязательно и должно содержать fileName и originalName',
+        message: 'Поле image обязательно и должно содержать fileName и originalName',
       });
     }
 
@@ -60,12 +57,9 @@ async function createProduct(req: Request, res: Response, next: NextFunction) {
 
     // --- 3. Проверка на дубликат MongoDB ---
     if (err.code === 11000) {
-      return res
-        .status(409)
-        .json({ message: 'Обнаружены существующие данные' });
+      return res.status(409).json({ message: 'Обнаружены существующие данные' });
     }
 
     return next(err); // Остальные ошибки передаем в errorHandler
   }
 }
-export default createProduct;
