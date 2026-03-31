@@ -5,13 +5,15 @@ import BaseError from '../errors/default-error';
 function errorHandler(err: any, _req: Request, res: Response, _next: NextFunction) {
   if (isCelebrateError(err)) {
     const bodyError = err.details.get('body');
+    const detail = bodyError?.details?.[0];
+    const message = detail?.message || 'Ошибка валидации';
+    const key = detail?.context?.key;
 
-    const message = bodyError?.details?.[0]?.message || 'Ошибка валидации';
-    const key = bodyError?.details?.[0]?.context?.key;
-
-    // Если ключ title, возвращаем 409, иначе 400
     if (key === 'title') {
-      return res.status(409).json({ message });
+      // Здесь можно выбрать статус в зависимости от сообщения или типа ошибки
+      if (message.includes('Поле title обязательно и должно существовать')) {
+        return res.status(409).json({ message });
+      } return res.status(400).json({ message });
     }
 
     return res.status(400).json({ message });

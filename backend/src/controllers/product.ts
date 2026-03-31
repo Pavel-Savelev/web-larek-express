@@ -18,7 +18,7 @@ export function createProduct(req: Request, res: Response, next: NextFunction) {
   console.log('CREATE PRODUCT WORKS');
 
   if (!title) {
-    return res.status(400).send({ message: 'Поле title обязательно и должно быть строкой' });
+    return res.status(400).send({ message: 'Поле title обязательно и должно существовать' });
   }
 
   if (title.trim().length < 2) {
