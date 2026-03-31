@@ -7,6 +7,6 @@ import validateProductResponse from '../middlewares/validate-product-response';
 const productRouter = Router();
 
 productRouter.get('/', getProduct);
-productRouter.post('/', validateProduct, sanitizeOrderMiddleware, createProduct, validateProductResponse);
+productRouter.post('/', validateProduct, sanitizeOrderMiddleware, validateProductResponse, createProduct);
 
 export default productRouter;
